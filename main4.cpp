@@ -43,28 +43,30 @@ int main()
     fstream file("Files/in3.txt", ios::in);
     if (file.is_open()){
 
-        int i = 0, row = 0, col = 0;
-        int** myArr;
-        
-        while(!file.eof()){
+        int row = 0, col = 0;
+        int** myArr = nullptr;
 
-            if (i == 0){
-                file >> row;
-            }         
-            else if (i == 1){
-                file >> col;
-                myArr = create_two_dim_array(row, col);
-            }    
-            else{
-                int j = i-2;
-                file >> myArr[j/col][j%col];
+        if (file >> row){
+            if (row <= 0) {
+                 cout << "Неверный размер массива!";
+                 return 0;
             }
-            i++;
-        }
-        reverse_two_dim_array(myArr, row, col);
-        print_two_dim_array(myArr, row, col);
-        delete_two_dim_array(myArr, row, col);
 
+            if (file >> col){
+                if (col <= 0) {
+                    cout << "Неверный размер массива!";
+                    return 0;
+                }
+
+                myArr = create_two_dim_array(row, col);
+                for (int i = 0; i < row * col; i++) file >> myArr[i/col][i%col];
+
+                reverse_two_dim_array(myArr, row, col);
+                print_two_dim_array(myArr, row, col);
+                delete_two_dim_array(myArr, row, col);
+
+            }
+        }
     }
     else{
         cout << "Файл Files/in3.txt не найден!";

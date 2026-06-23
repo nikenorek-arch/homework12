@@ -13,10 +13,7 @@ int main()
 
     fstream file("Files/in1.txt", ios::in);
     if (file.is_open()){
-        while(!file.eof()){
-            file >> text ;
-            cout << text << endl;
-        }
+        while(file >> text) cout << text << endl;
     }
     else{
         cout << "Файл Files/in1.txt не найден!";

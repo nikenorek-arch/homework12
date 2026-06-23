@@ -25,25 +25,24 @@ int main()
     fstream file("Files/in2.txt", ios::in);
     if (file.is_open()){
 
-        int i = 0, size = 0;
-        int* myArr;
+        int size = 0;
+        int* myArr = nullptr;
         
-        while(!file.eof()){
+        if (file >> size){
 
-            if (i == 0) {
-                file >> size;
-                myArr = new int[size];
+            if (size <= 0) {
+                 cout << "Неверный размер массива!";
+                 return 0;
             }
-            else{
-                file >> myArr[i-1];
-            }
-            i++;
+
+            myArr = new int[size];
+            for (int i = 0; i < size; i++) file >> myArr[i];
+
+            reverse(myArr, size);
+            print(myArr, size);
+            delete[] myArr;
+
         }
-        reverse(myArr, size);
-        print(myArr, size);
-
-        delete[] myArr;
-
     }
     else{
         cout << "Файл Files/in2.txt не найден!";

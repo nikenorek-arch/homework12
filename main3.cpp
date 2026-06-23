@@ -33,7 +33,7 @@ int main()
     SetConsoleOutputCP(65001);
 
     int size = 0;
-    int* myArr = NULL;
+    int* myArr = nullptr;
 
     cout << "Введите размер массива: ";
     cin >> size;
